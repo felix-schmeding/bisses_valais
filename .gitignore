@@ -1,3 +1,25 @@
+# Ignore .DS_Store files created by macOS
+.DS_Store
+
+# shapefiles
+*.cpg
+*.dbf
+*.prj
+*.qmd
+*.shp
+*.shx
+*.xml
+
+# tif files
+
+*.tif
+
+# csv
+
+*.csv
+
+### python files ---------------------------
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
