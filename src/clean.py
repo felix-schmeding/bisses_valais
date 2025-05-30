@@ -21,7 +21,7 @@ def clean_list_json(bisse_dict, couche_select, bisse_line, path_save, save_shp=F
         path_bisse (_type_): _description_
         bisse_line (_type_): _description_
         path_save (_type_): _description_
-        save_shp (bool, optional): _description_. Defaults to False.
+        save_shp (bool, optional): if cleaned data is saved to shapefile or not. Defaults to False. (not implemented yet)
     """
 
     json_for_plot = {}
@@ -36,12 +36,48 @@ def clean_list_json(bisse_dict, couche_select, bisse_line, path_save, save_shp=F
         elif type_donnee == "section":
             # ! if needed select col names here
             clean_df = clean_sections(raw_shp, bisse_line)
-
+            # ! need to take 'prio' into account
             clean_df = section.create_sections(clean_df, prio="fin_debut")
         elif type_donnee == "surface":
-            # need to handle link data somewhere
-            # first need to hangle
-            print("Surface not implemented yet")
+            # load also the shapefile with the point data
+            # so no need to process the point data, one new data for each surface value even if linked to same point value
+            # save as point data
+            link = generic_json[couche_select][key]["lien"]  # liste: ["couche", "key"]
+            link_path = os.path.normpath(
+                os.path.join(
+                    bisse_dict["data_path"], bisse_dict[link[0]][link[1]]["raw"]
+                )
+            )
+            link_shp = gpd.read_file(link_path).to_crs(
+                "EPSG:2056"
+            )  # to swiss projection
+            # ! it is assumed that the link is a point data
+            link_df = clean_snap_pointvalue(link_shp, bisse_line)
+
+            raw_shp["surface"] = raw_shp.geometry.area  # Make sure CRS is in meters!
+            col = generic_json[couche_select][key]["col"]
+            # ! it is assumed first col is categorical, second numeric
+            raw_shp.loc[:, col[1]] = raw_shp.loc[:, col[1]].apply(
+                pd.to_numeric, errors="coerce"
+            )
+
+            # Step 2: Group by valve and crop type
+            summary = (
+                raw_shp.drop(columns=["geometry"])  # drop geometry
+                .groupby(["link_id", col[0]])  # group by type
+                .agg("sum")
+                .reset_index()
+            )
+
+            # Step 5: Merge with valve GeoDataFrame (preserving valve geometry)
+            clean_df = link_df.filter(["id", "dist_m"]).merge(
+                summary, left_on="id", right_on="link_id", how="left"
+            )
+
+            # Optional: drop extra column
+            clean_df = clean_df.drop(columns="link_id")
+
+            # print("Surface not implemented yet")
         elif type_donnee == "unique":
             print("Val unique not implemented yet")
 
