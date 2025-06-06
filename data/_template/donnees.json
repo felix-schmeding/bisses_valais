@@ -1,0 +1,51 @@
+{
+    "liste_touristique": {
+        "didact":{
+            "nom_indice":"Panneaux information",
+            "type_donnee":"point",
+            "format_donnee": ["categorique"],
+            "drop_down":"path/to/file", 
+            "col": ["type"]
+        }
+    },
+    "liste_environnement":{
+        "biotope":{
+            "nom_indice":"Biotopes",
+            "type_donnee":"section",
+            "format_donnee": ["categorique"],
+            "drop_down":"path/to/file",
+            "col": [["val_av", "val_ap"]]
+        }
+    },
+    "liste_hydrologique":{
+        "revetement":{
+            "nom_indice":"Revêtement",
+            "type_donnee":"section",
+            "format_donnee": ["categorique"],
+            "drop_down":"path/to/file", 
+            "col": ["type_revet"]
+        }
+        
+    }, 
+    "liste_agricole":{
+        "prises": {
+            "nom_indice":"Prises",
+            "type_donnee":"point",
+            "format_donnee": "lien"
+        },
+        "surf_irig":{
+            "nom_indice":"Surfaces iriguées",
+            "type_donnee":"surface",
+            "format_donnee": ["categorique", "numerique"],
+            "lien": ["liste_agricole", "prises"],
+            "col": ["type", "surface"]
+        },
+        "besoin_eau":{
+            "nom_indice":"Besoin en eau",
+            "type_donnee":"surface",
+            "format_donnee": ["categorique", "numerique"],
+            "lien": ["liste_agricole", "prises"],
+            "col": ["type", "besoin"]
+        }
+    }
+}

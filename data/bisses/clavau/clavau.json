@@ -1,0 +1,36 @@
+{
+    "nom":"Bisse de Clavau",
+    "nom_inventaire": "Clavau",
+    "data_path": "data/bisses/clavau",
+    "date_creation":"12/04/2025",
+    "liste_touristique": {
+        "didact":{
+            "raw":"_raw/panneaux/panneaux_didact.shp",
+            "date":2024
+        }
+    },
+    "liste_environnement":{
+        "biotope":{
+            "sample_dir": "fin_debut",
+            "raw":"_raw/biotope/biotope.shp",
+            "date":2024
+        }
+    },
+    "liste_hydrologique":{
+        "revetement":{
+            "sample_dir": "fin_debut",
+            "raw":""
+        }
+    },
+    "liste_agricole":{
+        "prises": {
+            "raw":"_raw/prises_eau/prises_eau.shp"
+        },
+        "surf_irig":{
+            "raw":"_raw/surfaces_irriguees/surf_irrig.shp"
+        },
+        "besoin_eau":{
+            "raw":"_raw/surfaces_irriguees/surf_irrig.shp"
+        }
+    }
+}
