@@ -21,6 +21,10 @@ plot.json
 
 *.csv
 
+# zip
+
+*.zip
+
 ### python files ---------------------------
 
 # Byte-compiled / optimized / DLL files

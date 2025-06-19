@@ -3,19 +3,33 @@ Developpement d'un modèle conceptuel pour les bisses valaisans
 
 # Environnement python
 
-Les librairies nécéssaires sont:
+Les librairies principales nécéssaires sont:
 - numpy
 - pandas
 - geopandas
 - dash
 - plotly
+- matplotlib
+- jupyter
+
+Pour la simplicité, en utilisant miniconda sur windows, il suffit d'éxeuter la ligne suivante dans le terminal:
+
+```conda env create -f bisses.yml```
 
 # Données
+
+veuillez extraire le fichier .zip téléchargeable ici:
+
+https://drive.google.com/file/d/1ekxOOZdapU4JCK8PRz-tVJuAGe8tSaQP/view?usp=sharing
+
+Le fichier .qgz et le dossier /data doivent être placés dans le dossier principale de ce projet.
 
 Pour pouvoir traiter les données, il suffit de suivre les étapes suivantes:
 - Dans QGIS: dupliquer une couche template du format de donnée adaptée
 - modifier le json propre au bisse en ajouter un dict avec comme "key" la même que dans le json donnees.json (/template)
 - ajouter les infos supplémentaire (date, chemin de sauvegarde, ...)
+
+Pour plus de détail, voir le README.md dans le dossier "data/bisses"
 
 
 
