@@ -19,7 +19,7 @@
     "liste_hydrologique":{
         "revetement":{
             "sample_dir": "fin_debut",
-            "raw":""
+            "raw":"_raw/revetement/revetement.shp"
         }
     },
     "liste_agricole":{
