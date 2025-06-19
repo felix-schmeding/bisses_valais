@@ -26,7 +26,12 @@ def clean_list_json(bisse_dict, couche_select, bisse_line, path_save, save_shp=F
 
     json_for_plot = {}
     for key, data in bisse_dict[couche_select].items():
+        if data["raw"] == "":
+            print(f"Skipping {key} as no data is available")
+            continue
+
         load_path = os.path.normpath(os.path.join(bisse_dict["data_path"], data["raw"]))
+
         raw_shp = gpd.read_file(load_path).to_crs("EPSG:2056")  # to swiss projection
 
         # need to access generic json
